@@ -8,7 +8,7 @@ services:
     environment:
       - HBOX_LOG_LEVEL=info
       - HBOX_LOG_FORMAT=text
-      - HBOX_WEB_MAX_UPLOAD_SIZE=10
+      - HBOX_WEB_MAX_UPLOAD_SIZE=25
       # Uncomment and set to enable HTTPS
       # - HBOX_WEB_TLS_CERT=/certs/cert.pem
       # - HBOX_WEB_TLS_KEY=/certs/key.pem
