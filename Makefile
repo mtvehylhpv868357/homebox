@@ -27,6 +27,11 @@ test:
 	@echo "Running backend tests..."
 	cd backend && go test ./... -v
 
+## Run tests without verbose output (faster to scan for failures)
+test-short:
+	@echo "Running backend tests (short)..."
+	cd backend && go test ./...
+
 ## Run linter
 lint:
 	@echo "Linting backend..."
