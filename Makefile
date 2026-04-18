@@ -73,4 +73,8 @@ migrate:
 	cd backend && go run ./app/tools/migrate
 
 ## Full dev setup: start docker deps, then run backend
-dev: docker-up run
+# Note: added a small delay so docker services (db, etc.) have time to be ready before backend starts
+dev: docker-up
+	@echo "Waiting for services to be ready..."
+	@sleep 3
+	@$(MAKE) run
