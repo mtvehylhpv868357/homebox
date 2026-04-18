@@ -57,6 +57,11 @@ docker-down:
 	@echo "Stopping services..."
 	docker compose down
 
+## Stop services and remove volumes (useful for a clean slate)
+docker-reset:
+	@echo "Stopping services and removing volumes..."
+	docker compose down -v
+
 ## Install frontend dependencies and run dev server
 frontend-dev:
 	@echo "Starting frontend dev server..."
