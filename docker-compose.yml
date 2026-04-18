@@ -1,19 +1,28 @@
+version: "3.8"
+
 services:
   homebox:
-    image: homebox
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-      args:
-        - COMMIT=head
-        - BUILD_TIME=0001-01-01T00:00:00Z
-      x-bake:
-        platforms:
-            - linux/amd64
-            - linux/arm64
-            - linux/arm
+    image: ghcr.io/hay-kot/homebox:latest
+    container_name: homebox
+    restart: unless-stopped
     environment:
-      - HBOX_DEBUG=true
-      - HBOX_LOGGER_LEVEL=-1
+      - HBOX_LOG_LEVEL=info
+      - HBOX_LOG_FORMAT=text
+      - HBOX_WEB_MAX_UPLOAD_SIZE=10
+      # Uncomment and set to enable HTTPS
+      # - HBOX_WEB_TLS_CERT=/certs/cert.pem
+      # - HBOX_WEB_TLS_KEY=/certs/key.pem
     ports:
-      - 3100:7745
+      - "3100:7745"
+    volumes:
+      - homebox-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:7745/api/v1/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  homebox-data:
+    driver: local
