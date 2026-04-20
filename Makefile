@@ -78,8 +78,9 @@ migrate:
 	cd backend && go run ./app/tools/migrate
 
 ## Full dev setup: start docker deps, then run backend
-# Note: increased sleep to 5s since my machine is slower and db wasn't always ready in time
+# Note: increased sleep to 8s since my machine is slower and db wasn't always ready in time
+# (5s was still occasionally causing "connection refused" errors on first startup)
 dev: docker-up
 	@echo "Waiting for services to be ready..."
-	@sleep 5
+	@sleep 8
 	@$(MAKE) run
