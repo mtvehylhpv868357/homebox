@@ -53,9 +53,10 @@ func main() {
 
 	log.Println("shutting down server...")
 
-	// Allow up to 10 seconds for in-flight requests to complete.
-	// 30s felt excessive for a personal homelab instance; 10s is plenty.
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	// Allow up to 5 seconds for in-flight requests to complete.
+	// Running this on a Raspberry Pi at home — 5s is more than enough
+	// and keeps restarts snappy when I'm iterating on changes.
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
